@@ -43,7 +43,7 @@ export const editService = async (id:string, request:Service) => {
         },
         data : {
             name: request.name,
-            price: request.price,
+            price: parseInt(request.price),
             category_id: request.category_id,
             updated_at: new Date().toISOString()
         }
