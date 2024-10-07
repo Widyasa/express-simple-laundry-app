@@ -16,6 +16,9 @@ export const findService = async (request:RequestGetAll) => {
                 category: request.search,
                 category_id: request.search
 
+            },
+            include: {
+                category: true
             }
         },
         { page: request.page }
