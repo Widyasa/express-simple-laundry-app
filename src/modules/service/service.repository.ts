@@ -26,7 +26,12 @@ export const findService = async (request:RequestGetAll) => {
     return service
 }
 export const findServiceById = async (id:string) => {
-    const service = await prisma.services.findFirst({where: {id}})
+    const service = await prisma.services.findFirst({
+        where: {id},
+        include : {
+            category: true
+        }
+    })
     return service
 }
 export const insertService = async (request:Service) => {

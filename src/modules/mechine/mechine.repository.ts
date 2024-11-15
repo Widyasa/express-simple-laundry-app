@@ -28,7 +28,12 @@ export const findMechine = async (request:RequestGetAll) => {
     return mechine
 }
 export const findMechineById = async (id:string) => {
-    const mechine = await prisma.mechines.findFirst({where: {id}})
+    const mechine = await prisma.mechines.findFirst({
+        where: {id},
+        include : {
+            category: true
+        }
+    })
     return mechine
 }
 export const insertMechine = async (request:Mechine) => {

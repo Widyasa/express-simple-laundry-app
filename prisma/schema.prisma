@@ -43,29 +43,33 @@ model Services {
 
 enum TransactionStatus {
   on_progress
+  pending
   finished
   canceled
 }
 
 model Transactions {
-  id             String            @id @default(cuid())
-  total_price    Int
-  total_pay      Int
-  total_exchange Int
-  start_date     String
-  end_date       String
-  status         TransactionStatus @default(on_progress)
-  created_at     DateTime          @default(now())
-  updated_at     DateTime          @updatedAt
+  id               String             @id @default(cuid())
+  total_price      Int
+  total_pay        Int
+  total_exchange   Int
+  start_date       String
+  end_date         String
+  status           TransactionStatus  @default(on_progress)
+  created_at       DateTime           @default(now())
+  updated_at       DateTime           @updatedAt
+  TransactionItems TransactionItems[]
 }
 
 model TransactionItems {
-  id         String   @id @default(cuid())
-  service_id String
-  qty        Int
-  service    Services @relation(fields: [service_id], references: [id])
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  id             String       @id @default(cuid())
+  service_id     String
+  transaction_id String
+  qty            Int
+  service        Services     @relation(fields: [service_id], references: [id])
+  transaction    Transactions @relation(fields: [transaction_id], references: [id])
+  created_at     DateTime     @default(now())
+  updated_at     DateTime     @updatedAt
 }
 
 model MechineCategories {
