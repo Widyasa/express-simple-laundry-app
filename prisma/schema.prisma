@@ -86,25 +86,25 @@ enum mechineStatus {
 }
 
 model Mechines {
-  id                    String              @id @default(cuid())
+  id                    String                @id @default(cuid())
   name                  String
   code                  String
   last_maintanance_date String
-  status                mechineStatus       @default(inactive)
+  status                mechineStatus         @default(inactive)
   next_maintanance_date String
-  category              MechineCategories   @relation(fields: [category_id], references: [id])
+  category              MechineCategories     @relation(fields: [category_id], references: [id])
   category_id           String
-  created_at            DateTime            @default(now())
-  updated_at            DateTime            @updatedAt
-  MechineMaintances     MechineMaintances[]
+  created_at            DateTime              @default(now())
+  updated_at            DateTime              @updatedAt
+  MechineMaintenance    MechineMaintenances[]
 }
 
-model MechineMaintances {
-  id             String   @id @default(cuid())
-  mechines       Mechines @relation(fields: [mechine_id], references: [id])
-  mechine_id     String
-  maintance_date String
-  description    String
-  created_at     DateTime @default(now())
-  updated_at     DateTime @updatedAt
+model MechineMaintenances {
+  id               String   @id @default(cuid())
+  mechines         Mechines @relation(fields: [mechine_id], references: [id])
+  mechine_id       String
+  maintenance_date String
+  description      String
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
 }
